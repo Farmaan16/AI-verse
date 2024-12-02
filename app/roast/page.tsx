@@ -40,7 +40,7 @@ export default function Home() {
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
