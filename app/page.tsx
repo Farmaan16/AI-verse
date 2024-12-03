@@ -1,85 +1,86 @@
-"use client";
+import { ArrowUpRight, Flame, Heart, Laugh,  } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import Navbar from '@/components/Navbar'
 
-import { useState } from "react";
+const bots = [
+  {
+    name: "Roast Bot",
+    description: "Get hilariously roasted by AI",
+    icon: Flame,
+    href: "/roast",
+    gradient: "from-orange-400 to-red-500",
+    btngradiant:
+      "bg-gradient-to-r from-orange-300 to-red-400 hover:bg-gradient-to-r hover:from-orange-100 hover:to-red-200 opacity-50 group-hover:opacity-55 transition-opacity duration-300",
+  },
+  {
+    name: "Rizz Bot",
+    description: "Learn the art of smooth talking",
+    icon: Heart,
+    href: "/rizz",
+    gradient: "from-pink-400 to-purple-500",
+    btngradiant:
+      "bg-gradient-to-r from-pink-300 to-purple-400 hover:bg-gradient-to-r hover:from-pink-100 hover:to-purple-200 opacity-50 group-hover:opacity-55 transition-opacity duration-300",
+  },
+  {
+    name: "Joke Bot",
+    description: "Enjoy AI-generated jokes and puns",
+    icon: Laugh,
+    href: "/joke",
+    gradient: "from-green-400 to-blue-500",
+    btngradiant:
+      "bg-gradient-to-r from-green-300 to-blue-400 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-200 opacity-50 group-hover:opacity-55 transition-opacity duration-300",
+  },
+];
 
-export default function Home() {
-  const [input, setInput] = useState("");
-  const [roast, setRoast] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
-  };
-
-  const handleRoast = async () => {
-    if (!input.trim()) {
-      setError("Please enter something to roast!");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-    setRoast("");
-
-    try {
-      const response = await fetch("/api/roast", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ input }),
-      });
-
-      const data = await response.json();
-
-      if (data.roast) {
-        setRoast(data.roast);
-      } else {
-        setError(data.error || "Something went wrong!");
-      }
-    } catch (error) {
-      setError("An error occurred. Please try again.");
-      console.log(error)
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export default function LandingPage() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Roastify
-        </h1>
-        <p className="text-center text-gray-600 mb-4">
-          Give us any input and get roasted!
-        </p>
-
-        <input
-          type="text"
-          placeholder="Enter something to roast"
-          value={input}
-          onChange={handleInputChange}
-          className="w-full p-3 mb-4 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-          disabled={loading}
-        />
-
-        <button
-          onClick={handleRoast}
-          disabled={loading}
-          className="w-full p-3 bg-red-500 text-white rounded-md hover:bg-red-600 disabled:bg-gray-400"
-        >
-          {loading ? "Roasting..." : "Roast!"}
-        </button>
-
-        {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
-        {roast && (
-          <p className="mt-4 text-center text-xl font-bold text-red-600">
-            {roast}
+    <div className="min-h-screen bg-gradient-to-br from-stone-800 to-black text-white">
+      <Navbar />
+      <main className="container mx-auto px-4 py-16">
+        <header className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-stone-200 via-blue-500 to-teal-600">
+            Welcome to AI-Verse
+          </h1>
+          <p className="text-xl text-gray-500">
+            Get ready to vibe with bots that keep it real!
           </p>
-        )}
-      </div>
+        </header>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {bots.map((bot) => (
+            <Card
+              key={bot.name}
+              className="bg-gray-800 border-gray-700 overflow-hidden relative group"
+            >
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${bot.gradient} opacity-50 group-hover:opacity-75 transition-opacity duration-300`}
+              ></div>
+              <div className="relative z-10">
+                <CardHeader>
+                  <bot.icon className="w-16 h-16 mb-4 text-white" />
+                  <CardTitle className="text-2xl font-bold text-white">
+                    {bot.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">{bot.description}</p>
+                </CardContent>
+                <CardFooter className="flex justify-end">
+                  <Button
+                    variant={"default"}
+                    className={`text-zinc-800 rounded-3xl ${bot.btngradiant} hover:bg-zinc-300`}
+                  >
+                    <Link href={bot.href}>Try {bot.name} </Link>
+                    <ArrowUpRight size={20} />
+                  </Button>
+                </CardFooter>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
+

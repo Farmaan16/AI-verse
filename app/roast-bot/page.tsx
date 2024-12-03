@@ -47,10 +47,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Roastify
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-stone-800 to-black text-white">
+      <div className="bg-gradient-to-r from-zinc-500 to-orange-600 p-8 rounded-xl shadow-lg w-full max-w-screen-sm">
+        <h1 className="text-xl font-bold text-center text-gray-800 mb-6">
+          test
         </h1>
         <p className="text-center text-gray-600 mb-4">
           Give us any input and get roasted!
@@ -61,21 +61,21 @@ export default function Home() {
           placeholder="Enter something to roast"
           value={input}
           onChange={handleInputChange}
-          className="w-full p-3 mb-4 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="w-full p-3 mb-4 border bg-zinc-700 text-stone-100 border-stone-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500"
           disabled={loading}
         />
 
         <button
           onClick={handleRoast}
           disabled={loading}
-          className="w-full p-3 bg-red-500 text-white rounded-md hover:bg-red-600 disabled:bg-gray-400"
+          className="w-full  p-3 bg-red-500 text-white rounded-xl hover:bg-red-600 disabled:bg-gray-400"
         >
           {loading ? "Roasting..." : "Roast!"}
         </button>
 
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
         {roast && (
-          <p className="mt-4 text-center text-xl font-bold text-red-600">
+          <p className="mt-4 text-center text-xl font-bold text-zinc-200">
             {roast}
           </p>
         )}
