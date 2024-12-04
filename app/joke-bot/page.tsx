@@ -115,7 +115,7 @@ export default function Home() {
             {copySuccess && (
               <p className="text-green-400 font-semibold text-sm mt-2">
                 Copied to clipboard!
-              </p>
+              </p> 
             )}
           </div>
         )}
