@@ -15,13 +15,13 @@ export default function Navbar() {
           <div className="flex space-x-4">
             <Link
               href="/"
-              className="text-blue-400 hover:text-white transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               About
             </Link>
             <Link
               href="/"
-              className="text-blue-400 hover:text-white transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               Contact
             </Link>

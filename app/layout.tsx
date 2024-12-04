@@ -5,9 +5,12 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AI-Verse: Futuristic AI Bots',
-  description: 'Explore the future of AI with our cutting-edge bots!',
-}
+  title: "AI-Verse: Futuristic AI Bots",
+  description: "Get ready to vibe with bots that keep it real!",
+  icons: {
+    icon: "/logo.png",
+  }
+};
 
 export default function RootLayout({
   children,
